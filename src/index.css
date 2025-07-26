@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./assets/fonts/Orbitron/orbitron.woff2') format('woff2'),
+    url('./assets/fonts/Orbitron/orbitron.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+/* Base styles without @layer */
+body {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #050514, #0D0D2A); /* dark-base to #0D0D2A */
+  color: #F5F5F5; /* text-white */
+  font-family: sans-serif;
+}
+h1 {
+  font-family: "Orbitron", sans-serif;  /* Apply Orbitron only to titles */
+}
+a {
+  color: #00E5FF; /* neon-cyan */
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #3effb5; /* neon-pink */
+}
+
+button {
+  background-color: #14142E; /* dark-secondary */
+  color: #F5F5F5; /* text-white */
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 229, 255, 0.3); /* neon-cyan/30 */
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 0 rgba(0, 229, 255, 0.4);
+  font-family: 'Orbitron', sans-serif;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color:rgb(10, 173, 191); /* neon-pink */
+  border-color: #00E5FF; /* neon-pink */
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+
+/* Custom Animations and Effects */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 4px #00E5FF50, 0 0 8px #00E5FF50, 0 0 16px #00E5FF50, 0 0 24px #00E5FF50;
+  }
+  50% {
+    text-shadow: 0 0 8px #00E5FF50, 0 0 16px #00E5FF50, 0 0 24px #00E5FF50, 0 0 32px #00E5FF50;
+  }
+  100% {
+    text-shadow: 0 0 4px #00E5FF50, 0 0 8px #00E5FF50, 0 0 16px #00E5FF50, 0 0 24px #00E5FF50;
+  }
+}
+
+.animate-glow {
+  animation: glow 2s infinite ease-in-out;
+}
+
+.glow-button {
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5), 0 0 20px rgba(62, 255, 197, 0.5);
+  transition: box-shadow 0.3s;
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.8), 0 0 30px rgba(62, 255, 171, 0.8);
+}
+
+/* Particle Background Effect */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+
+.particles::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #00E5FF;
+  box-shadow: 50px 50px #00E5FF, 100px 150px#3effb5, 150px 80px #FFD60A,
+              200px 200px #00E5FF, 300px 50px #3effb5, 400px 300px #FFD60A,
+              500px 100px #00E5FF, 600px 250px #3effb5, 700px 150px #FFD60A;
+  animation: float 10s infinite ease-in-out;
+}
+
+.particles::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #3effb5;
+  box-shadow: 80px 120px #00E5FF, 120px 300px #FFD60A, 180px 50px #00E5FF,
+              250px 180px #3effb5, 350px 100px #FFD60A, 450px 250px #00E5FF,
+              550px 80px #3effb5, 650px 200px #FFD60A, 750px 300px #00E5FF;
+  animation: float 15s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.7;
+  }
+}
+

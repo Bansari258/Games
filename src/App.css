@@ -1,0 +1,62 @@
+.text-shadow {
+  text-shadow: 0 0 2px rgba(0, 229, 255, 0.3), 0 0 5px rgba(0, 229, 255, 0.3),
+    0 0 8px rgba(0, 229, 255, 0.3);
+}
+
+
+
+/* Custom Styles for Games */
+.game-container {
+  background-color: #14142e; /* dark-secondary */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); /* neon-cyan glow */
+  max-width: 28rem; /* 448px */
+  width: 100%;
+}
+
+.game-title {
+  text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff, 0 0 40px #00e5ff,
+    0 0 60px #00e5ff;
+}
+
+.game-button {
+  background: linear-gradient(
+    to right,
+    #00e5ff,
+    #ff3ea5
+  ); /* neon-cyan to neon-pink */
+  color: #f5f5f5;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.game-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.8);
+  cursor: pointer;
+}
+
+.game-text {
+  color: #f5f5f5; /* text-white */
+  font-size: 1.125rem; /* text-lg */
+}
+
+.game-text span.highlight-cyan {
+  color: #00e5ff; /* neon-cyan */
+  font-weight: bold;
+}
+
+.game-text span.highlight-pink {
+  color: #ff3ea5; /* neon-pink */
+  font-weight: bold;
+}
+
+.game-text span.highlight-yellow {
+  color: #ffd60a; /* neon-yellow */
+  font-weight: bold;
+}
