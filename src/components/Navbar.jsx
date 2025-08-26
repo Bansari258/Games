@@ -13,6 +13,7 @@ const Navbar = () => {
     { name: 'Whack-a-Mole', path: '/whack-a-mole' },
     { name: 'Memory Game', path: '/memory-game' },
     { name: 'Wordle', path: '/wordle' },
+    { name: 'Simon', path: '/simon' },
   ];
 
   return (

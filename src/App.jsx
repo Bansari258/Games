@@ -9,6 +9,8 @@ import MemoryGame from './pages/MemoryGame';
 import Wordle from './pages/Wordle';
 import SnakesAndLadders from './pages/SnakesAndLadders';
 import Game from './pages/Game';
+import './App.css'
+import SimonGame from './pages/SimonGame';
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path="/memory-game" element={<MemoryGame />} />
         <Route path="/wordle" element={<Wordle />} />
         <Route path="/snakes-ladders" element={<SnakesAndLadders />} />
+        <Route path="/simon" element={<SimonGame />} />
       </Routes>
     </>
   );

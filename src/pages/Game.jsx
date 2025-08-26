@@ -12,7 +12,8 @@ const Game = () => {
         { name: 'Rock Paper Scissors', path: '/rock-paper-scissors' },
         { name: 'Whack-a-Mole', path: '/whack-a-mole' },
         { name: 'Memory Game', path: '/memory-game' },
-        { name: 'Wordle', path: '/wordle' },
+        // { name: 'Wordle', path: '/wordle' },
+        { name: 'Simon', path: '/simon' },
     ];
     return (
         <div className='flex flex-col items-center w-screen h-screen pt-8'>

@@ -60,3 +60,86 @@
   color: #ffd60a; /* neon-yellow */
   font-weight: bold;
 }
+
+/* Base colors as CSS variables for better maintainability */
+:root {
+  --red: #ff0000;
+  --green: #00ff00;
+  --blue: #0000ff;
+  --yellow: #ffff00;
+  --active: #ffffff;
+  --activeUser: #cccccc;
+}
+
+/* Simon box styles */
+.simon-box {
+  transition: all 0.2s ease;
+}
+
+.red {
+  background-color: var(--red) !important;
+}
+
+.green {
+  background-color: var(--green) !important;
+}
+
+.blue {
+  background-color: var(--blue) !important;
+}
+
+.yellow {
+  background-color: var(--yellow) !important;
+}
+
+.active {
+  background-color: var(--active) !important;
+  transform: scale(1.05);
+}
+
+.activeUser {
+  background-color: var(--activeUser) !important;
+  transform: scale(1.05);
+}
+
+/* Additional styles for better appearance */
+.game-container {
+  padding: 20px;
+}
+
+.game-button {
+  background-color: #4a4a4a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.game-button:hover:not(:disabled) {
+  background-color: #6b6b6b;
+}
+
+.score-card {
+  background-color: #2a2a2a;
+}
+
+.text-muted {
+  color: #a0a0a0;
+}
+
+.text-neon-cyan {
+  color: #00f7ff;
+}
+
+.text-neon-pink {
+  color: #ff007a;
+}
+
+.text-neon-purple {
+  color: #d400ff;
+}
+
+.font-orbitron {
+  font-family: 'Orbitron', sans-serif;
+}

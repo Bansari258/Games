@@ -1,70 +1,82 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const MemoryGame = () => {
-      const navigate = useNavigate();
-
+  const navigate = useNavigate();
   const emojis = ['🐱', '🐶', '🐰', '🦁', '🐻', '🦊', '🐼', '🐯'];
-  const initialCards = [...emojis, ...emojis]
-    .sort(() => Math.random() - 0.5)
-    .map((emoji, index) => ({ id: index, emoji, flipped: false, matched: false }));
+
+  const initialCards = useMemo(() => 
+    [...emojis, ...emojis]
+      .sort(() => Math.random() - 0.5)
+      .map((emoji, index) => ({ id: index, emoji, flipped: false, matched: false })),
+    []
+  );
 
   const [cards, setCards] = useState(initialCards);
   const [flippedCards, setFlippedCards] = useState([]);
   const [matches, setMatches] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-  const handleCardClick = (index) => {
+  const handleCardClick = useCallback((index) => {
     if (gameOver || cards[index].flipped || cards[index].matched || flippedCards.length === 2) return;
 
-    const newCards = [...cards];
-    newCards[index].flipped = true;
-    setCards(newCards);
+    setCards(prev => {
+      const newCards = [...prev];
+      newCards[index].flipped = true;
+      return newCards;
+    });
 
-    const newFlippedCards = [...flippedCards, { index, emoji: cards[index].emoji }];
-    setFlippedCards(newFlippedCards);
+    const newFlippedCard = { index, emoji: cards[index].emoji };
+    setFlippedCards(prev => [...prev, newFlippedCard]);
 
-    if (newFlippedCards.length === 2) {
-      const [firstCard, secondCard] = newFlippedCards;
-      if (firstCard.emoji === secondCard.emoji) {
-        const updatedCards = [...newCards];
-        updatedCards[firstCard.index].matched = true;
-        updatedCards[secondCard.index].matched = true;
-        setCards(updatedCards);
-        setMatches(matches + 1);
+    if (flippedCards.length === 1) {
+      const [firstCard] = flippedCards;
+      if (firstCard.emoji === newFlippedCard.emoji) {
+        setCards(prev => {
+          const newCards = [...prev];
+          newCards[firstCard.index].matched = true;
+          newCards[newFlippedCard.index].matched = true;
+          return newCards;
+        });
+        setMatches(prev => {
+          const newMatches = prev + 1;
+          if (newMatches === emojis.length) setGameOver(true);
+          return newMatches;
+        });
         setFlippedCards([]);
-        if (matches + 1 === emojis.length) {
-          setGameOver(true);
-        }
       } else {
         setTimeout(() => {
-          const updatedCards = [...newCards];
-          updatedCards[firstCard.index].flipped = false;
-          updatedCards[secondCard.index].flipped = false;
-          setCards(updatedCards);
+          setCards(prev => {
+            const newCards = [...prev];
+            newCards[firstCard.index].flipped = false;
+            newCards[newFlippedCard.index].flipped = false;
+            return newCards;
+          });
           setFlippedCards([]);
         }, 1000);
       }
     }
-  };
+  }, [cards, flippedCards, gameOver]);
 
-  const resetGame = () => {
-    const shuffledCards = [...emojis, ...emojis]
+  const resetGame = useCallback(() => {
+    setCards([...emojis, ...emojis]
       .sort(() => Math.random() - 0.5)
-      .map((emoji, index) => ({ id: index, emoji, flipped: false, matched: false }));
-    setCards(shuffledCards);
+      .map((emoji, index) => ({ id: index, emoji, flipped: false, matched: false }))
+    );
     setFlippedCards([]);
     setMatches(0);
     setGameOver(false);
-  };
+  }, []);
 
   return (
-    <><button
-      onClick={() => navigate(-1)}
-      className="text-text-white hover:text-neon-purple font-orbitron font-medium text-sm transition duration-300 m-5  absolute "
-    >
-      &#8592; Back
-    </button><div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
+    <>
+      <button
+        onClick={() => navigate(-1)}
+        className="text-text-white hover:text-neon-purple font-orbitron font-medium text-sm transition duration-300 m-5 absolute"
+      >
+        &#8592; Back
+      </button>
+      <div className="flex items-center justify-center min-h-[calc(100vh-64px)]">
         <div className="text-center">
           <h1 className="text-4xl text-neon-cyan game-title tracking-tight uppercase mb-4">
             Memory Game
@@ -92,9 +104,11 @@ const MemoryGame = () => {
                   <button
                     key={card.id}
                     onClick={() => handleCardClick(index)}
-                    className={`h-20 w-20 rounded-lg text-3xl transition-all duration-300 border border-neon-cyan/20 ${card.flipped || card.matched
+                    className={`h-20 w-20 rounded-lg text-3xl transition-all duration-300 border border-neon-cyan/20 ${
+                      card.flipped || card.matched
                         ? 'bg-neon-pink text-white'
-                        : 'bg-dark-base text-white hover:bg-[#252550] hover:border-neon-cyan/50'}`}
+                        : 'bg-dark-base text-white hover:bg-[#252550] hover:border-neon-cyan/50'
+                    }`}
                   >
                     {(card.flipped || card.matched) ? card.emoji : ''}
                   </button>
@@ -103,7 +117,8 @@ const MemoryGame = () => {
             )}
           </div>
         </div>
-      </div></>
+      </div>
+    </>
   );
 };
 
